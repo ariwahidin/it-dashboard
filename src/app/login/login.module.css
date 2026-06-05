@@ -1,0 +1,330 @@
+/* ── Root: full viewport ─────────────────────────────────── */
+.root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: var(--font-body);
+}
+
+/* ── Background image ────────────────────────────────────── */
+/* .bgWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+} */
+.bgWrap {
+  position: fixed;
+  /* ← fixed agar cover seluruh viewport */
+  inset: 0;
+  /* top:0 right:0 bottom:0 left:0 */
+  width: 80%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Overlay */
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(13, 31, 92, 0.5) 66%,
+      rgba(13, 31, 92, 1.0) 73%,
+      rgba(13, 31, 92, 1.0) 100%);
+}
+
+/* ── Form wrapper — posisi kanan, vertically centered ───── */
+.formWrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  margin-right: clamp(24px, 6vw, 96px);
+  padding: 24px 0;
+}
+
+/* Solid navy miring — pakai clip-path polygon biar ada efek diagonal */
+.solidCover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 52%;
+  /* background: #1a50c8; */
+  background: #041F5F;
+  clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+
+/* ── Form card ───────────────────────────────────────────── */
+.formCard {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 36px 32px;
+  width: 100%;
+  box-shadow: 0 8px 48px rgba(10, 24, 80, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Avatar */
+.avatarCircle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #e3f0fb;
+  border: 2px solid #90caf9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.welcomeTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0d1f5c;
+  margin-bottom: 8px;
+}
+
+.welcomeSub {
+  font-size: 12.5px;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* ── Form fields ─────────────────────────────────────────── */
+.form {
+  width: 100%;
+}
+
+.fieldGroup {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  height: 46px;
+  padding: 0 14px;
+  gap: 10px;
+  background: #f9fafb;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+
+.inputWrap:focus-within {
+  border-color: #1a3a8f;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.1);
+}
+
+.inputIcon {
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13.5px;
+  color: #111827;
+  font-family: var(--font-body);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.eyeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.eyeBtn:hover {
+  color: #1a3a8f;
+}
+
+.formFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0 20px;
+}
+
+.rememberLabel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+  accent-color: #1a3a8f;
+  cursor: pointer;
+}
+
+.forgotLink {
+  font-size: 12.5px;
+  color: #1a3a8f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.errorMsg {
+  font-size: 12.5px;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin-bottom: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.loginBtn {
+  width: 100%;
+  height: 48px;
+  background: #1a3a8f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+}
+
+.loginBtn:hover:not(:disabled) {
+  background: #0d2463;
+}
+
+.loginBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.loginBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dividerOr {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0 14px;
+  color: #9ca3af;
+  font-size: 12px;
+  gap: 12px;
+}
+
+.dividerOr::before,
+.dividerOr::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.tagline {
+  font-size: 11px;
+  color: #1a3a8f;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .root {
+    justify-content: center;
+  }
+
+  .formWrap {
+    margin-right: 0;
+    padding: 24px 16px;
+  }
+
+  .bgOverlay {
+    background: rgba(13, 31, 92, 0.55);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .formWrap {
+    max-width: 100%;
+    padding: 16px 12px;
+  }
+
+  .formCard {
+    padding: 32px 24px 28px;
+    border-radius: 16px;
+  }
+}

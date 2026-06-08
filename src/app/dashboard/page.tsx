@@ -67,7 +67,7 @@ const DASHBOARDS = [
     iconColor: "#6366f1",
     // img: "/images/img-4.jpeg",
     img: "/images/img-2.jpeg",
-    href: "/dashboards/hr.html",
+    href: "/dashboards/YIID_On_Development.html",
   },
   {
     id: "finance",
@@ -76,7 +76,7 @@ const DASHBOARDS = [
     iconColor: "#16a34a",
     // img: "/images/img-5.jpeg",
     img: "/images/img-1.jpeg",
-    href: "/dashboards/finance.html",
+    href: "/dashboards/YIID_On_Development.html",
   },
   {
     id: "transport",
@@ -84,7 +84,7 @@ const DASHBOARDS = [
     desc: "Track transportation performance including fleet utilization, shipment status, delivery performance, and cost.",
     iconColor: "#d97706",
     img: "/images/img-6.jpeg",
-    href: "/dashboards/transport.html",
+    href: "/dashboards/YIID_On_Development.html",
   },
   {
     id: "sales",
@@ -93,7 +93,7 @@ const DASHBOARDS = [
     iconColor: "#dc2626",
     // img: "/images/img-7.jpeg",
     img: "/images/img-4.jpeg",
-    href: "/dashboards/sales.html",
+    href: "/dashboards/YIID_On_Development.html",
   },
   {
     id: "sustainability",
@@ -102,7 +102,7 @@ const DASHBOARDS = [
     iconColor: "#16a34a",
     // img: "/images/img-8.jpeg",
     img: "/images/img-9.jpeg",
-    href: "/dashboards/sustainability.html",
+    href: "/dashboards/YIID_On_Development.html",
   },
 ];
 

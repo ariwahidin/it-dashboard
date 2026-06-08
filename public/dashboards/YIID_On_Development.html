@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still in Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f5f7;
+    --ink:#1f2937;
+    --muted:#9aa3af;
+    --yellow:#fbc02d;
+    --yellow-d:#f5a623;
+    --dark:#2b2f36;
+    --orange:#ff7a2f;
+    --orange-l:#ff9f5b;
+    --light:#dfe3e8;
+    --light-2:#e9ecf0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Nunito',sans-serif;
+    background:radial-gradient(120% 100% at 50% 0%, #fafbfc 0%, #eef0f3 100%);
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:32px;color:var(--ink);
+    overflow-x:hidden;
+  }
+  .stage{
+    position:relative;width:100%;max-width:1180px;aspect-ratio:1180/780;
+  }
+  /* floating decor */
+  .decor{position:absolute;fill:#e3e6ea;opacity:.9;}
+  .gear-1{top:30%;left:9%;width:90px;animation:spin 22s linear infinite;}
+  .gear-2{top:38%;left:16%;width:60px;animation:spin 16s linear infinite reverse;}
+  .cloud{position:absolute;background:#e7eaee;border-radius:40px;}
+  .cloud-1{top:16%;right:8%;width:120px;height:46px;}
+  .cloud-1::before{content:"";position:absolute;width:60px;height:60px;background:#e7eaee;border-radius:50%;top:-26px;left:24px;}
+  .dot{position:absolute;border-radius:50%;background:#dfe3e8;}
+  .d1{width:18px;height:18px;top:18%;left:16%;}
+  .d2{width:10px;height:10px;top:25%;left:21%;}
+  .d3{width:14px;height:14px;bottom:34%;right:14%;}
+  .d4{width:8px;height:8px;bottom:38%;right:11%;}
+  .dash{position:absolute;left:10%;top:52%;display:flex;gap:7px;}
+  .dash span{width:16px;height:7px;border-radius:4px;background:#dfe3e8;}
+
+  /* text */
+  .copy{position:absolute;top:6%;left:50%;transform:translateX(-50%);text-align:center;z-index:5;width:auto;}
+  .title{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(38px,6.2vw,74px);line-height:.98;color:#222a38;letter-spacing:-1px;}
+  .sub{margin-top:14px;color:#8b94a0;font-size:clamp(15px,1.7vw,21px);font-weight:600;line-height:1.35;white-space:nowrap;}
+  .foot{position:absolute;bottom:3%;left:53%;transform:translateX(-50%);text-align:center;color:#9aa3af;font-weight:600;font-size:clamp(13px,1.5vw,18px);line-height:1.4;width:auto;white-space:nowrap;z-index:8;}
+
+  /* browser window */
+  .scene{position:absolute;inset:0;}
+  .browser{
+    position:absolute;left:29%;top:33%;width:48%;height:50%;
+    background:#fff;border:7px solid var(--dark);border-radius:18px;
+    box-shadow:0 30px 50px rgba(40,46,56,.12);
+  }
+  .bar{height:14%;border-bottom:3px solid #eef0f2;display:flex;align-items:center;padding-left:18px;gap:8px;background:#fafbfc;border-radius:11px 11px 0 0;}
+  .bar i{width:13px;height:13px;border-radius:50%;display:inline-block;}
+  .r{background:#ef5350;}.y{background:#fbc02d;}.g{background:#4caf50;}
+  .pbiTab{margin-left:14px;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #eceff2;border-radius:7px;padding:3px 10px;font-size:9px;font-weight:700;color:#5a626c;}
+  .pbiTab svg{width:11px;height:11px;}
+  .dash-view{height:86%;width:100%;}
+  .dash-view svg{width:100%;height:100%;display:block;border-radius:0 0 11px 11px;}
+
+  /* crane */
+  .crane{position:absolute;right:5%;bottom:8%;width:24%;height:62%;}
+  .crane svg{width:100%;height:100%;overflow:visible;}
+  .hook{animation:sway 4s ease-in-out infinite;transform-origin:top center;}
+
+  /* signs / barriers */
+  .barrier{position:absolute;left:36%;bottom:5%;width:24%;z-index:6;filter:drop-shadow(0 14px 14px rgba(0,0,0,.12));}
+  .workSign{position:absolute;left:13%;bottom:12%;width:11%;z-index:4;filter:drop-shadow(0 12px 12px rgba(0,0,0,.12));}
+  .roadblock{position:absolute;right:8%;bottom:14%;width:16%;z-index:3;filter:drop-shadow(0 12px 12px rgba(0,0,0,.1));}
+  .cone{position:absolute;width:7%;z-index:7;}
+  .cone-1{left:24%;bottom:6%;}
+  .cone-2{right:18%;bottom:4%;}
+
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes sway{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
+
+  .fade{opacity:0;animation:fade .8s ease forwards;}
+  .delay1{animation-delay:.1s;}.delay2{animation-delay:.25s;}.delay3{animation-delay:.4s;}
+  @keyframes fade{to{opacity:1;}}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- decorative bg -->
+  <svg class="decor gear-1" viewBox="0 0 100 100"><path d="M50 0l6 12 13-4 1 14 13 4-7 12 9 11-13 6 1 14-13-3-6 12-9-9-9 9-6-12-13 3 1-14-13-6 9-11-7-12 13-4 1-14 13 4z"/><circle cx="50" cy="50" r="14" fill="#f4f5f7"/></svg>
+  <svg class="decor gear-2" viewBox="0 0 100 100"><path d="M50 0l6 12 13-4 1 14 13 4-7 12 9 11-13 6 1 14-13-3-6 12-9-9-9 9-6-12-13 3 1-14-13-6 9-11-7-12 13-4 1-14 13 4z"/><circle cx="50" cy="50" r="14" fill="#f4f5f7"/></svg>
+  <div class="cloud cloud-1"></div>
+  <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span>
+  <div class="dash"><span></span><span></span></div>
+
+  <!-- headline -->
+  <div class="copy fade delay1">
+    <h1 class="title">Still in<br>Development</h1>
+    <p class="sub">We're working hard to bring you something amazing.</p>
+  </div>
+
+  <div class="scene">
+    <!-- browser window -->
+    <div class="browser fade delay2">
+      <div class="bar">
+        <i class="r"></i><i class="y"></i><i class="g"></i>
+        <span class="pbiTab">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="4" height="12" rx="1" fill="#F2C811"/><rect x="10" y="4" width="4" height="16" rx="1" fill="#E6A700"/><rect x="17" y="11" width="4" height="9" rx="1" fill="#F2C811"/></svg>
+          Logistics Performance.pbix
+        </span>
+      </div>
+      <div class="dash-view">
+        <svg viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="pbiHead" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#F2C811"/><stop offset="1" stop-color="#E6A700"/>
+            </linearGradient>
+            <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#E6A700"/><stop offset="1" stop-color="#F2C811"/>
+            </linearGradient>
+            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F2C811" stop-opacity=".35"/>
+              <stop offset="1" stop-color="#F2C811" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- canvas -->
+          <rect x="0" y="0" width="760" height="520" fill="#f6f7f9"/>
+
+          <!-- report header bar -->
+          <rect x="0" y="0" width="760" height="58" fill="url(#pbiHead)"/>
+          <g transform="translate(24,18)">
+            <rect x="0" y="2" width="5" height="20" rx="1.5" fill="#3a3320"/>
+            <rect x="9" y="-4" width="5" height="26" rx="1.5" fill="#3a3320"/>
+            <rect x="18" y="8" width="5" height="14" rx="1.5" fill="#3a3320"/>
+          </g>
+          <text x="58" y="34" font-family="Baloo 2,sans-serif" font-weight="800" font-size="18" fill="#2b2410">Yusen Logistics Dashboard</text>
+          <!-- header right controls -->
+          <rect x="600" y="18" width="64" height="22" rx="11" fill="#ffffff" opacity=".55"/>
+          <text x="632" y="33" font-family="Nunito,sans-serif" font-weight="700" font-size="10" fill="#5a4d12" text-anchor="middle">FY 2026</text>
+          <circle cx="690" cy="29" r="11" fill="#ffffff" opacity=".55"/>
+          <path d="M686 29h8M690 25v8" stroke="#5a4d12" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="722" cy="29" r="11" fill="#ffffff" opacity=".55"/>
+          <path d="M717 29l3.5 3.5L727 26" stroke="#5a4d12" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- KPI CARDS ROW -->
+          <!-- card template -->
+          <g font-family="Nunito,sans-serif">
+            <!-- KPI 1 -->
+            <rect x="24" y="78" width="166" height="86" rx="12" fill="#fff"/>
+            <rect x="24" y="78" width="6" height="86" rx="3" fill="#F2C811"/>
+            <text x="44" y="104" font-size="11" font-weight="700" fill="#9aa3af">SHIPMENTS</text>
+            <text x="44" y="135" font-family="Baloo 2,sans-serif" font-size="28" font-weight="800" fill="#2b2f36">24,810</text>
+            <text x="44" y="152" font-size="10" font-weight="700" fill="#22a06b">▲ 12.4% vs LM</text>
+
+            <!-- KPI 2 -->
+            <rect x="204" y="78" width="166" height="86" rx="12" fill="#fff"/>
+            <rect x="204" y="78" width="6" height="86" rx="3" fill="#E6A700"/>
+            <text x="224" y="104" font-size="11" font-weight="700" fill="#9aa3af">ON-TIME %</text>
+            <text x="224" y="135" font-family="Baloo 2,sans-serif" font-size="28" font-weight="800" fill="#2b2f36">96.3%</text>
+            <text x="224" y="152" font-size="10" font-weight="700" fill="#22a06b">▲ 2.1 pts</text>
+
+            <!-- KPI 3 -->
+            <rect x="384" y="78" width="166" height="86" rx="12" fill="#fff"/>
+            <rect x="384" y="78" width="6" height="86" rx="3" fill="#F2C811"/>
+            <text x="404" y="104" font-size="11" font-weight="700" fill="#9aa3af">REVENUE</text>
+            <text x="404" y="135" font-family="Baloo 2,sans-serif" font-size="28" font-weight="800" fill="#2b2f36">$4.7M</text>
+            <text x="404" y="152" font-size="10" font-weight="700" fill="#22a06b">▲ 8.9% YoY</text>
+
+            <!-- KPI 4 -->
+            <rect x="564" y="78" width="172" height="86" rx="12" fill="#fff"/>
+            <rect x="564" y="78" width="6" height="86" rx="3" fill="#ef6b6b"/>
+            <text x="584" y="104" font-size="11" font-weight="700" fill="#9aa3af">AVG COST / KG</text>
+            <text x="584" y="135" font-family="Baloo 2,sans-serif" font-size="28" font-weight="800" fill="#2b2f36">$1.92</text>
+            <text x="584" y="152" font-size="10" font-weight="700" fill="#ef6b6b">▼ 3.0%</text>
+          </g>
+
+          <!-- BAR CHART (left, large) -->
+          <g font-family="Nunito,sans-serif">
+            <rect x="24" y="180" width="346" height="200" rx="12" fill="#fff"/>
+            <text x="44" y="206" font-size="12" font-weight="800" fill="#2b2f36">Monthly Volume by Region</text>
+            <!-- gridlines -->
+            <g stroke="#eef0f3" stroke-width="1">
+              <line x1="64" y1="240" x2="350" y2="240"/>
+              <line x1="64" y1="280" x2="350" y2="280"/>
+              <line x1="64" y1="320" x2="350" y2="320"/>
+              <line x1="64" y1="356" x2="350" y2="356"/>
+            </g>
+            <!-- bars -->
+            <g>
+              <rect x="78" y="262" width="24" height="94" rx="4" fill="url(#barGrad)"/>
+              <rect x="118" y="232" width="24" height="124" rx="4" fill="url(#barGrad)"/>
+              <rect x="158" y="288" width="24" height="68" rx="4" fill="url(#barGrad)"/>
+              <rect x="198" y="248" width="24" height="108" rx="4" fill="url(#barGrad)"/>
+              <rect x="238" y="276" width="24" height="80" rx="4" fill="url(#barGrad)"/>
+              <rect x="278" y="222" width="24" height="134" rx="4" fill="url(#barGrad)"/>
+              <rect x="318" y="258" width="24" height="98" rx="4" fill="url(#barGrad)"/>
+            </g>
+            <g font-size="9" font-weight="700" fill="#aab1ba" text-anchor="middle">
+              <text x="90" y="370">JKT</text><text x="130" y="370">SBY</text><text x="170" y="370">BDG</text>
+              <text x="210" y="370">MDN</text><text x="250" y="370">SMG</text><text x="290" y="370">BPN</text><text x="330" y="370">MKS</text>
+            </g>
+          </g>
+
+          <!-- DONUT (right top) -->
+          <g font-family="Nunito,sans-serif">
+            <rect x="384" y="180" width="352" height="200" rx="12" fill="#fff"/>
+            <text x="404" y="206" font-size="12" font-weight="800" fill="#2b2f36">Shipment Mode Split</text>
+            <g transform="translate(470,295)">
+              <circle r="56" fill="none" stroke="#f0f1f4" stroke-width="22"/>
+              <!-- donut segments via stroke-dasharray (circumference ~351.9) -->
+              <circle r="56" fill="none" stroke="#F2C811" stroke-width="22" stroke-dasharray="158 352" transform="rotate(-90)"/>
+              <circle r="56" fill="none" stroke="#E6A700" stroke-width="22" stroke-dasharray="106 352" stroke-dashoffset="-158" transform="rotate(-90)"/>
+              <circle r="56" fill="none" stroke="#3a3f47" stroke-width="22" stroke-dasharray="60 352" stroke-dashoffset="-264" transform="rotate(-90)"/>
+              <circle r="56" fill="none" stroke="#cfd3d8" stroke-width="22" stroke-dasharray="28 352" stroke-dashoffset="-324" transform="rotate(-90)"/>
+              <text y="-2" font-family="Baloo 2,sans-serif" font-size="20" font-weight="800" fill="#2b2f36" text-anchor="middle">100%</text>
+              <text y="15" font-size="9" font-weight="700" fill="#9aa3af" text-anchor="middle">TOTAL</text>
+            </g>
+            <!-- legend -->
+            <g transform="translate(575,250)" font-size="10" font-weight="700" fill="#5a626c">
+              <rect x="0" y="0" width="11" height="11" rx="3" fill="#F2C811"/><text x="18" y="9">Road 45%</text>
+              <rect x="0" y="22" width="11" height="11" rx="3" fill="#E6A700"/><text x="18" y="31">Sea 30%</text>
+              <rect x="0" y="44" width="11" height="11" rx="3" fill="#3a3f47"/><text x="18" y="53">Air 17%</text>
+              <rect x="0" y="66" width="11" height="11" rx="3" fill="#cfd3d8"/><text x="18" y="75">Rail 8%</text>
+            </g>
+          </g>
+
+          <!-- LINE / AREA TREND (full width bottom) -->
+          <g font-family="Nunito,sans-serif">
+            <rect x="24" y="394" width="712" height="106" rx="12" fill="#fff"/>
+            <text x="44" y="418" font-size="12" font-weight="800" fill="#2b2f36">On-Time Delivery Trend</text>
+            <text x="640" y="418" font-size="10" font-weight="700" fill="#22a06b">Target 95%</text>
+            <line x1="44" y1="424" x2="712" y2="424" stroke="#f0f1f4"/>
+            <!-- target dashed -->
+            <line x1="44" y1="452" x2="712" y2="452" stroke="#d9dde2" stroke-width="1" stroke-dasharray="4 4"/>
+            <!-- area -->
+            <path d="M50 470 L140 458 L230 462 L320 444 L410 450 L500 436 L590 442 L680 430 L712 432 L712 488 L50 488 Z" fill="url(#areaFill)"/>
+            <!-- line -->
+            <path d="M50 470 L140 458 L230 462 L320 444 L410 450 L500 436 L590 442 L680 430 L712 432" fill="none" stroke="#E6A700" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#F2C811" stroke="#fff" stroke-width="2">
+              <circle cx="50" cy="470" r="3.5"/><circle cx="140" cy="458" r="3.5"/><circle cx="230" cy="462" r="3.5"/>
+              <circle cx="320" cy="444" r="3.5"/><circle cx="410" cy="450" r="3.5"/><circle cx="500" cy="436" r="3.5"/>
+              <circle cx="590" cy="442" r="3.5"/><circle cx="680" cy="430" r="3.5"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- crane -->
+    <div class="crane fade delay3">
+      <svg viewBox="0 0 260 600">
+        <!-- base -->
+        <rect x="80" y="540" width="110" height="26" rx="8" fill="#3a3f47"/>
+        <rect x="96" y="500" width="78" height="46" rx="6" fill="#535963"/>
+        <!-- mast -->
+        <rect x="118" y="120" width="34" height="400" fill="#fbc02d"/>
+        <g stroke="#e0a000" stroke-width="4">
+          <line x1="118" y1="160" x2="152" y2="200"/><line x1="152" y1="160" x2="118" y2="200"/>
+          <line x1="118" y1="220" x2="152" y2="260"/><line x1="152" y1="220" x2="118" y2="260"/>
+          <line x1="118" y1="280" x2="152" y2="320"/><line x1="152" y1="280" x2="118" y2="320"/>
+          <line x1="118" y1="340" x2="152" y2="380"/><line x1="152" y1="340" x2="118" y2="380"/>
+          <line x1="118" y1="400" x2="152" y2="440"/><line x1="152" y1="400" x2="118" y2="440"/>
+          <line x1="118" y1="460" x2="152" y2="500"/><line x1="152" y1="460" x2="118" y2="500"/>
+        </g>
+        <!-- jib -->
+        <rect x="10" y="118" width="230" height="30" rx="6" fill="#fbc02d"/>
+        <g stroke="#e0a000" stroke-width="4">
+          <line x1="20" y1="118" x2="60" y2="148"/><line x1="60" y1="118" x2="20" y2="148"/>
+          <line x1="90" y1="118" x2="130" y2="148"/><line x1="130" y1="118" x2="90" y2="148"/>
+          <line x1="170" y1="118" x2="210" y2="148"/><line x1="210" y1="118" x2="170" y2="148"/>
+        </g>
+        <!-- top cables -->
+        <path d="M135 60 L40 118 M135 60 L230 118" stroke="#2b2f36" stroke-width="4" fill="none"/>
+        <rect x="125" y="48" width="20" height="20" rx="4" fill="#fbc02d"/>
+        <!-- cab -->
+        <rect x="150" y="118" width="60" height="48" rx="8" fill="#f5a623"/>
+        <rect x="162" y="128" width="22" height="22" rx="4" fill="#2b2f36"/>
+        <!-- counterweight -->
+        <rect x="218" y="120" width="30" height="40" rx="5" fill="#cfd3d8"/>
+        <!-- hook + load -->
+        <g class="hook">
+          <line x1="62" y1="148" x2="62" y2="300" stroke="#2b2f36" stroke-width="4"/>
+          <rect x="50" y="298" width="24" height="20" rx="5" fill="#fbc02d"/>
+          <rect x="44" y="320" width="36" height="40" rx="6" fill="#cfd3d8"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- road block (right) -->
+    <svg class="roadblock" viewBox="0 0 220 150">
+      <line x1="55" y1="80" x2="55" y2="140" stroke="#3a3f47" stroke-width="12" stroke-linecap="round"/>
+      <line x1="165" y1="80" x2="165" y2="140" stroke="#3a3f47" stroke-width="12" stroke-linecap="round"/>
+      <rect x="20" y="58" width="180" height="40" rx="8" fill="#fff"/>
+      <g clip-path="inset(0 round 8px)">
+        <rect x="20" y="58" width="180" height="40" fill="#fff"/>
+        <g fill="#fbc02d"><rect x="20" y="58" width="30" height="40" transform="skewX(-20)" /></g>
+      </g>
+      <rect x="20" y="58" width="180" height="40" rx="8" fill="url(#stripeR)"/>
+      <circle cx="40" cy="55" r="13" fill="#fbc02d"/>
+      <circle cx="180" cy="55" r="13" fill="#fbc02d"/>
+      <defs>
+        <pattern id="stripeR" width="34" height="40" patternUnits="userSpaceOnUse" patternTransform="skewX(-30)">
+          <rect width="34" height="40" fill="#fff"/>
+          <rect width="17" height="40" fill="#fbc02d"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <!-- work in progress sign (left) -->
+    <svg class="workSign" viewBox="0 0 140 200">
+      <rect x="34" y="20" width="72" height="120" rx="10" fill="#fbc02d"/>
+      <rect x="40" y="26" width="60" height="108" rx="6" fill="#f5a623"/>
+      <path d="M70 40c-8 0-14 6-14 14 0 4 2 8 5 10l-9 22 8 4 9-22c5-1 9-5 11-9l-9 1-4-6 9-3c0-6-3-11-7-11z" fill="#2b2f36" transform="scale(.8) translate(18 12)"/>
+      <text x="70" y="118" font-family="Baloo 2,sans-serif" font-weight="800" font-size="14" fill="#2b2f36" text-anchor="middle">WORK</text>
+      <text x="70" y="132" font-family="Baloo 2,sans-serif" font-weight="700" font-size="9" fill="#2b2f36" text-anchor="middle">IN PROGRESS</text>
+      <line x1="42" y1="140" x2="30" y2="190" stroke="#cfa400" stroke-width="9" stroke-linecap="round"/>
+      <line x1="98" y1="140" x2="110" y2="190" stroke="#cfa400" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+
+    <!-- under construction barrier (center) -->
+    <svg class="barrier" viewBox="0 0 320 200">
+      <line x1="70" y1="120" x2="70" y2="185" stroke="#3a3f47" stroke-width="14" stroke-linecap="round"/>
+      <line x1="250" y1="120" x2="250" y2="185" stroke="#3a3f47" stroke-width="14" stroke-linecap="round"/>
+      <rect x="30" y="60" width="260" height="68" rx="10" fill="#fbc02d"/>
+      <rect x="30" y="60" width="260" height="16" rx="6" fill="url(#stripeC)"/>
+      <rect x="30" y="112" width="260" height="16" rx="6" fill="url(#stripeC)"/>
+      <rect x="44" y="80" width="232" height="28" rx="4" fill="#fbc02d"/>
+      <text x="160" y="91" font-family="Baloo 2,sans-serif" font-weight="800" font-size="15" fill="#2b2f36" text-anchor="middle">UNDER</text>
+      <text x="160" y="110" font-family="Baloo 2,sans-serif" font-weight="800" font-size="15" fill="#2b2f36" text-anchor="middle">CONSTRUCTION</text>
+      <defs>
+        <pattern id="stripeC" width="34" height="16" patternUnits="userSpaceOnUse" patternTransform="skewX(-35)">
+          <rect width="34" height="16" fill="#fbc02d"/>
+          <rect width="17" height="16" fill="#2b2f36"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <!-- cones -->
+    <svg class="cone cone-1" viewBox="0 0 80 110">
+      <ellipse cx="40" cy="100" rx="34" ry="9" fill="#e08a30"/>
+      <rect x="6" y="92" width="68" height="12" rx="5" fill="#ff9f5b"/>
+      <path d="M40 8 L60 92 H20 Z" fill="#ff7a2f"/>
+      <path d="M33 42 L47 42 L50 58 L30 58 Z" fill="#fff"/>
+      <path d="M28 66 L52 66 L55 80 L25 80 Z" fill="#fff"/>
+    </svg>
+    <svg class="cone cone-2" viewBox="0 0 80 110">
+      <ellipse cx="40" cy="100" rx="34" ry="9" fill="#e08a30"/>
+      <rect x="6" y="92" width="68" height="12" rx="5" fill="#ff9f5b"/>
+      <path d="M40 8 L60 92 H20 Z" fill="#ff7a2f"/>
+      <path d="M33 42 L47 42 L50 58 L30 58 Z" fill="#fff"/>
+      <path d="M28 66 L52 66 L55 80 L25 80 Z" fill="#fff"/>
+    </svg>
+  </div>
+
+  <!-- footer -->
+  <div class="foot fade delay3">
+    Thank you for your patience. We'll be live soon! <span style="color:#fbc02d">💛</span>
+  </div>
+</div>
+</body>
+</html>

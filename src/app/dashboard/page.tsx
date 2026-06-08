@@ -83,7 +83,7 @@ const DASHBOARDS = [
     title: "Transport Division Dashboard",
     desc: "Track transportation performance including fleet utilization, shipment status, delivery performance, and cost.",
     iconColor: "#d97706",
-    img: "/images/img-6.jpeg",
+    img: "/images/img-10.png",
     href: "/dashboards/YIID_On_Development.html",
   },
   {

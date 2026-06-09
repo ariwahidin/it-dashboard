@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./dashboard.module.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // ── Icons ──────────────────────────────────────────────────────────────────
 function Icon({ d }: { d: string }) {
@@ -123,6 +124,23 @@ const NAV_ITEMS: { id: NavPage; label: string; iconKey: keyof typeof Icons }[] =
 // ── Component ──────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const [activePage, setActivePage] = useState<NavPage>("home");
+  const [sessionUser, setSessionUser] = useState("Admin User");
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.username) setSessionUser(data.username);
+      })
+      .catch(() => { });
+  }, []);
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.refresh();
+    router.replace("/login");
+  }
 
   return (
     <div className={styles.root}>
@@ -163,11 +181,10 @@ export default function DashboardPage() {
         </nav>
 
         <div className={styles.sidebarBottom}>
-          {/* Logout navigates back to /login */}
-          <a href="/login" className={`${styles.navItem} ${styles.navLogout}`}>
+          <button onClick={handleLogout} className={`${styles.navItem} ${styles.navLogout}`}>
             <Icon d={Icons.logout} />
             <span>Logout</span>
-          </a>
+          </button>
         </div>
       </aside>
 
@@ -186,7 +203,7 @@ export default function DashboardPage() {
             </button>
             <div className={styles.userInfo}>
               <div className={styles.avatar}><Icon d={Icons.user} /></div>
-              <span className={styles.userName}>Admin User</span>
+              <span className={styles.userName}>{sessionUser}</span>
               <Icon d={Icons.chevron} />
             </div>
           </div>

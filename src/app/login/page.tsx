@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./login.module.css";
-// import router from "next/router";
 import { useRouter } from "next/navigation";
 
 function IconUser() {
@@ -43,19 +42,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  // const handleLogin = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   if (!username.trim() || !password.trim()) {
-  //     setError("Please fill in all fields.");
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   // TODO: ganti dengan API auth yang sesungguhnya
-  //   await new Promise((r) => setTimeout(r, 1400));
-  //   setLoading(false);
-  //   setError("Invalid username or password.");
-  // };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,34 +54,24 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    // ── TODO: Ganti dengan API auth yang sesungguhnya ──────────────────────
-    // Contoh pemanggilan API:
-    //
-    // const res = await fetch("/api/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ username, password }),
-    // });
-    //
-    // if (!res.ok) {
-    //   setError("Invalid username or password.");
-    //   setLoading(false);
-    //   return;
-    // }
-    //
-    // const { token } = await res.json();
-    // document.cookie = `token=${token}; path=/`;
-    // ──────────────────────────────────────────────────────────────────────
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username.trim(), password }),
+      });
 
-    // Simulasi auth (hapus setelah integrasi API nyata)
-    await new Promise((r) => setTimeout(r, 1200));
+      const data = await res.json();
 
-    // Untuk demo: username apapun + password apapun → sukses
-    // Ganti dengan validasi sesungguhnya dari response API
-    if (username && password) {
+      if (!res.ok) {
+        setError(data.error ?? "Invalid username or password.");
+        setLoading(false);
+        return;
+      }
+
       router.push("/dashboard");
-    } else {
-      setError("Invalid username or password.");
+    } catch {
+      setError("Network error. Please try again.");
       setLoading(false);
     }
   };

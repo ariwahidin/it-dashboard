@@ -103,7 +103,7 @@ const DASHBOARDS = [
     iconColor: "#16a34a",
     // img: "/images/img-8.jpeg",
     img: "/images/img-9.jpeg",
-    href: "/dashboards/YIID_On_Development.html",
+    href: "/dashboards/YIID_QPI_Dashboard.html",
   },
 ];
 

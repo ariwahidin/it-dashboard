@@ -37,8 +37,8 @@ const Icons = {
 const DASHBOARDS = [
   {
     id: "clt",
-    title: "CLT Business Performance Dashboard",
-    desc: "Overview of CLT business performance including revenue, volume, profitability, and customer analysis.",
+    title: "Corporate Planning Dashboard",
+    desc: "Monitor strategic initiatives, corporate KPI achievement, business planning, and project portfolio management.",
     iconColor: "#1a3a8f",
     // img: "/images/img-1.jpeg",
     img: "/images/img-8.jpeg",
@@ -46,8 +46,8 @@ const DASHBOARDS = [
   },
   {
     id: "warehouse",
-    title: "Warehouse Operation Dashboard",
-    desc: "Monitor warehouse operations including inbound, outbound, inventory, productivity, and service level.",
+    title: "BU Division Dashboard",
+    desc: "Track revenue growth, profitability, customer portfolio, business development, and operational performance.",
     iconColor: "#d97706",
     // img: "/images/img-2.jpeg",
     img: "/images/img-7.jpeg",
@@ -55,16 +55,16 @@ const DASHBOARDS = [
   },
   {
     id: "it",
-    title: "IT & SD Division Dashboard",
-    desc: "Track IT systems, digital initiatives, service desk performance, and SD projects & performance.",
+    title: "IT & Solution Design Dashboard",
+    desc: "Monitor system availability, project delivery, digital transformation, cybersecurity, and automation initiatives.",
     iconColor: "#0284c7",
     img: "/images/img-3.jpeg",
     href: "/dashboards/YIID_ITSD_Dashboard.html",
   },
   {
     id: "hr",
-    title: "HR Division Dashboard",
-    desc: "Monitor HR metrics including headcount, recruitment, turnover, training, and employee engagement.",
+    title: "Administration Dashboard",
+    desc: "Track workforce analytics, recruitment, training, employee engagement, administration, and corporate support activities.",
     iconColor: "#6366f1",
     // img: "/images/img-4.jpeg",
     img: "/images/img-2.jpeg",
@@ -72,8 +72,8 @@ const DASHBOARDS = [
   },
   {
     id: "finance",
-    title: "Finance Division Dashboard",
-    desc: "Financial overview including P&L, budget vs actual, cost analysis, and cash flow.",
+    title: "Finance & Accounting Dashboard",
+    desc: "Monitor P&L, budget realization, cash flow, financial performance, AR/AP aging, and cost optimization.",
     iconColor: "#16a34a",
     // img: "/images/img-5.jpeg",
     img: "/images/img-1.jpeg",
@@ -89,8 +89,8 @@ const DASHBOARDS = [
   },
   {
     id: "sales",
-    title: "Sales & Marketing Dashboard",
-    desc: "Sales pipeline, customer acquisition, revenue analysis, and marketing performance overview.",
+    title: "SSM Dashboard",
+    desc: "Track service performance, operational support efficiency, process management, and internal service excellence.",
     iconColor: "#dc2626",
     // img: "/images/img-7.jpeg",
     img: "/images/img-4.jpeg",
@@ -98,8 +98,8 @@ const DASHBOARDS = [
   },
   {
     id: "sustainability",
-    title: "Sustainability Dashboard",
-    desc: "Monitor sustainability initiatives, carbon emissions, energy consumption, and ESG performance.",
+    title: "QPI Division Dashboard",
+    desc: "Monitor Quality Management, KPI Achievement, Continuous Improvement, Productivity Index, and Operational Excellence.",
     iconColor: "#16a34a",
     // img: "/images/img-8.jpeg",
     img: "/images/img-9.jpeg",
@@ -192,7 +192,11 @@ export default function DashboardPage() {
       <div className={styles.main}>
         {/* HEADER */}
         <header className={styles.header}>
-          <div />
+          <div className={styles.pageHeader}>
+            <h1>Executive Management Portal</h1>
+            <p>Business Intelligence & Analytics Dashboard</p>
+          </div>
+
           <div className={styles.headerRight}>
             <button className={styles.iconBtn} aria-label="Search">
               <Icon d={Icons.search} />
@@ -230,13 +234,13 @@ export default function DashboardPage() {
 function HomePage() {
   return (
     <>
-      <div className={styles.pageHeader}>
-        <h1>Welcome Back!</h1>
-        <p>Business Intelligence Analytics Dashboard</p>
-      </div>
+      {/* <div className={styles.pageHeader}>
+        <h1>Executive Management Portal</h1>
+        <p>Business Intelligence & Analytics Dashboard</p>
+      </div> */}
 
-      <h2 className={styles.sectionTitle}>Explore Dashboards</h2>
-      <p className={styles.sectionSub}>Select a dashboard to view key insights and performance metrics across all divisions.</p>
+      <h2 className={styles.sectionTitle}>Welcome Back!</h2>
+      <p className={styles.sectionSub}>Explore key insights and performance metrics across all divisions.</p>
 
       <div className={styles.cardGrid}>
         {DASHBOARDS.map((d) => (
@@ -270,7 +274,7 @@ function HomePage() {
         ))}
       </div>
 
-      <div className={styles.helpBanner}>
+      {/* <div className={styles.helpBanner}>
         <div className={styles.helpLeft}>
           <Icon d={Icons.info} />
           <div>
@@ -281,7 +285,7 @@ function HomePage() {
         <button className={styles.helpBtn}>
           <Icon d={Icons.mail} /> Contact Support
         </button>
-      </div>
+      </div> */}
     </>
   );
 }
